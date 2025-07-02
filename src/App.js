@@ -8,7 +8,7 @@ function App() {
 
   // Load todos from backend
   useEffect(() => {
-    fetch('/api/todos')
+    fetch('https://todo-backend-8zys.onrender.com/api/todos')
       .then(res => res.json())
       .then(data => setTodos(data));
   }, []);
@@ -18,7 +18,7 @@ function App() {
     if (!todo.trim()) return;
 
     if (editId) {
-      const res = await fetch(`/api/todos/${editId}`, {
+      const res = await fetch(`https://todo-backend-8zys.onrender.com/api/todos/${editId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: todo }),
@@ -27,7 +27,7 @@ function App() {
       setTodos(todos.map((t) => (t._id === updated._id ? updated : t)));
       setEditId(null);
     } else {
-      const res = await fetch('/api/todos', {
+      const res = await fetch('https://todo-backend-8zys.onrender.com/api/todos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: todo }),
@@ -39,7 +39,7 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+    await fetch(`https://todo-backend-8zys.onrender.com/api/todos/${id}`, { method: 'DELETE' });
     setTodos(todos.filter((t) => t._id !== id));
   };
 
